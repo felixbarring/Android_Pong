@@ -21,10 +21,11 @@ public class Player extends Rectangle{
     }
     
     public void tick(){
-        if(target > topLeftY){
-            move(0.0f, speed * direction);
+        if(target >= topLeftY){
+            move(0.0f, speed);
+        } else {
+            move(0.0f, -speed);
         }
-        
         direction = 0;
     }
 
