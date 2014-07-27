@@ -1,11 +1,11 @@
-package com.pong.modell;
+package com.pong.android.modell;
 
 import com.pong.android.PongRenderer;
 
 public class Ball extends Rectangle {
 
     private int xDirection = -1;
-    private float xSpeed = 0.001f;
+    private float xSpeed = 0.005f;
     
     private int yDirection = -1;
     private float ySpeed = 0.005f;
@@ -23,11 +23,14 @@ public class Ball extends Rectangle {
         if (PongRenderer.opponent.intersects(this)) {
             toggleXDirection();
             move(2 * xSpeed * xDirection, 0.0f);
-        }
-        if (PongRenderer.player.intersects(this)) {
+        } else if (PongRenderer.player.intersects(this)) {
             toggleXDirection();
             move(2 * xSpeed * xDirection, 0.0f);
-        } else {
+        } else if(topLeftX < -1) {
+			// Opponent loses
+		} else if(topLeftX > 1) {
+			// Player loses
+		} else {
             move(xSpeed * xDirection, ySpeed * yDirection);
         }
     }

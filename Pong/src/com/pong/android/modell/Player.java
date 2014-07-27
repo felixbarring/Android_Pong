@@ -1,4 +1,4 @@
-package com.pong.modell;
+package com.pong.android.modell;
 
 public class Player extends Rectangle{
     
@@ -13,7 +13,7 @@ public class Player extends Rectangle{
     }
     
     public void touch(Float f){
-        target = f;
+        target = f+(float) (HEIGHT/2);
     }
     
     public void setDirection(int i){
@@ -22,9 +22,19 @@ public class Player extends Rectangle{
     
     public void tick(){
         if(target >= topLeftY){
-            move(0.0f, speed);
+            // If the distance to the target is less than the speed
+            // then the location will be set to the target coordinate.
+            if(target <= topLeftY+speed){
+                topLeftY = target;
+            } else {
+                move(0.0f, speed);
+            }
         } else {
-            move(0.0f, -speed);
+            if(target >= topLeftY-speed){
+                topLeftY = target;
+            } else {
+                move(0.0f, -speed);
+            }
         }
         direction = 0;
     }
