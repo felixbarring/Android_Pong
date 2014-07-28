@@ -1,4 +1,4 @@
-package com.pong.modell;
+package com.pong.android.modell;
 
 import com.pong.android.PongRenderer;
 

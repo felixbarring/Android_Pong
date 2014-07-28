@@ -1,4 +1,4 @@
-package com.pong.modell;
+package com.pong.android.modell;
 
 import static android.opengl.GLES20.GL_TRIANGLES;
 import static android.opengl.GLES20.glDrawArrays;

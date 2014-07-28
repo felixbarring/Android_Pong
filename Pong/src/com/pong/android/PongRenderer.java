@@ -14,9 +14,9 @@ import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 
 import com.pong.android.util.ShaderUtility;
-import com.pong.modell.Ball;
-import com.pong.modell.Opponent;
-import com.pong.modell.Player;
+import com.pong.android.modell.Ball;
+import com.pong.android.modell.Opponent;
+import com.pong.android.modell.Player;
 
 public class PongRenderer implements Renderer {
     private static final String A_POSITION = "a_Position";
