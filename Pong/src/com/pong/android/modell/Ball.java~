@@ -57,9 +57,9 @@ public class Ball extends Rectangle {
             move(2 * xSpeed * xDirection, 0.0f);
         } else if(topLeftX < -1) {
 			// Opponent loses
-	} else if(topLeftX > 1) {
+		} else if(topLeftX > 1) {
 			// Player loses
-	} else {
+		} else {
             move(xSpeed * xDirection, ySpeed * yDirection);
         }
     }
