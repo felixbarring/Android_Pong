@@ -1,3 +1,32 @@
+
+/*
+ * The MIT License
+ *
+ * Copyright 2014 Felix Bärring <felixbarring@gmail.com>.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+/**
+ * @author Felix Bärring <felixbarring@gmail.com>
+ */
+
 package com.pong.android;
 
 import java.nio.ByteBuffer;
@@ -13,10 +42,11 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 
-import com.pong.android.util.ShaderUtility;
 import com.pong.android.modell.Ball;
+import com.pong.android.modell.Board;
 import com.pong.android.modell.Opponent;
 import com.pong.android.modell.Player;
+import com.pong.android.util.ShaderUtility;
 
 public class PongRenderer implements Renderer {
     private static final String A_POSITION = "a_Position";
@@ -38,6 +68,7 @@ public class PongRenderer implements Renderer {
     public static Player player;
     public static Opponent opponent;
     public static Ball ball;
+    public static Board board;
     
     public static LinkedBlockingQueue<Float> queueOfTouchCoordinates = new LinkedBlockingQueue<Float>();
 
@@ -47,6 +78,7 @@ public class PongRenderer implements Renderer {
         player = new Player(0.1f, 0.6f, -0.95f, 0.3f, 0);
         opponent = new Opponent(0.1f, 0.6f, 0.85f, 0.3f, 6);
         ball = new Ball(0.1f, 0.1f, -0.70f, -0.25f, 12);
+        board = new Board(1.0f, 1.0f, 0.0f, 0.0f, 18);
 
         float[] tableVerticesWithTriangles =
             {
@@ -85,10 +117,20 @@ public class PongRenderer implements Renderer {
                 ball.topLeftY - ball.HEIGHT,
                 ball.topLeftX + ball.WIDTH,
                 ball.topLeftY - ball.HEIGHT,
-                // Ball triangle 2positionOffsetLocation
+                // Ball triangle 2
                 ball.topLeftX + ball.WIDTH, ball.topLeftY, ball.topLeftX,
                 ball.topLeftY, ball.topLeftX + ball.WIDTH,
                 ball.topLeftY - ball.HEIGHT,
+                
+                // Board triangle 1
+                board.topLeftX, board.topLeftY, board.topLeftX,
+                board.topLeftY - board.HEIGHT,
+                board.topLeftX + board.WIDTH,
+                board.topLeftY - board.HEIGHT,
+                // Ball triangle 2
+                board.topLeftX + board.WIDTH, board.topLeftY, board.topLeftX,
+                board.topLeftY, board.topLeftX + board.WIDTH,
+                board.topLeftY - board.HEIGHT,
 
             };
 
@@ -103,7 +145,7 @@ public class PongRenderer implements Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 glUnused, EGLConfig config) {
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
         int vertexShader = ShaderUtility.compileVertexShader(ShaderUtility
                 .readTextFileFromResource(context, R.raw.vertex_shader));
@@ -158,8 +200,13 @@ public class PongRenderer implements Renderer {
         // Clear the rendering surface and start drawing.
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
         GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, projectioinMatrix, 0);
-        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         
+        // Draw the board black
+        GLES20.glUniform4f(uColorLocation, 0.0f, 0.0f, 0.0f, 0.0f);
+        board.draw();
+        
+        // All other components shall be drawn in white
+        GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         player.draw();
         opponent.draw();
         ball.draw();
