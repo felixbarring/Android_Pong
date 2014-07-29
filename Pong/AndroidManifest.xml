@@ -5,7 +5,7 @@
  ! Copyrights apply to this code. It may not be used to create training material, 
  ! courses, books, articles, and the like. Contact us if you are in doubt.
  ! We make no guarantees that this code is fit for any purpose. 
- ! Visit http://www.pragmaticprogrammer.com/titles/kbogla for more book information.
+ ! Visit http://www.pragmaticprogrammer.com/titles/kbogla for more book information.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pong.android"
@@ -22,18 +22,20 @@
         <activity
             android:name=".PongActivity"
             android:label="@string/app_name" >
-            
         </activity>
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
+        </activity>
+        <activity
+            android:name=".PongGameOverActivity"
+            android:label="@string/title_activity_pong_game_over" >
         </activity>
     </application>
 
