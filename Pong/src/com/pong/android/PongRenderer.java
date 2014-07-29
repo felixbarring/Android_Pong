@@ -77,7 +77,7 @@ public class PongRenderer implements Renderer {
 
         player = new Player(0.1f, 0.6f, -0.95f, 0.3f, 0);
         opponent = new Opponent(0.1f, 0.6f, 0.85f, 0.3f, 6);
-        ball = new Ball(0.1f, 0.1f, -0.70f, -0.25f, 12);
+        ball = new Ball(0.1f, 0.1f, -0.05f, 0.05f, 12);
         board = new Board(2.0f, 2.0f, -1.0f, 1.0f, 18);
 
         float[] tableVerticesWithTriangles =
@@ -145,7 +145,7 @@ public class PongRenderer implements Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 glUnused, EGLConfig config) {
-        GLES20.glClearColor(1.0f, 0.0f, 1.0f, 0.0f);
+        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 
         int vertexShader = ShaderUtility.compileVertexShader(ShaderUtility
                 .readTextFileFromResource(context, R.raw.vertex_shader));
