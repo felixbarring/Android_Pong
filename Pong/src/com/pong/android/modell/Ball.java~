@@ -28,8 +28,6 @@
 
 package com.pong.android.modell;
 
-import android.widget.Toast;
-
 import com.pong.android.IFGameEvents;
 import com.pong.android.PongRenderer;
 
@@ -44,8 +42,6 @@ public class Ball extends Rectangle {
     private float speedIncrease = 0.002f;
 
     private final IFGameEvents gameEvents;
-    
-    private int successfullHits = 0;
 
     public Ball(float w, float h, float topLX, float topLY,
         int offsetVertexData, IFGameEvents gameEvents) {
@@ -62,9 +58,8 @@ public class Ball extends Rectangle {
             if (PongRenderer.player.intersects(this)) {
                 toggleXDirection();
                 move(2 * xSpeed * xDirection, 0.0f);
-                successfullHits++;
             } else {
-         	   gameEvents.playerLose(successfullHits);
+         	   gameEvents.playerLose();
 			}
         } else if (topLeftX+WIDTH > 0.85) {
             if (PongRenderer.opponent.intersects(this)) {
@@ -81,7 +76,7 @@ public class Ball extends Rectangle {
     private void toggleXDirection() {
         xDirection = -xDirection;
         xSpeed = xSpeed + speedIncrease;
-        ySpeed = ySpeed + (float)((Math.random() - 0.5)/50);
+        ySpeed = ySpeed + (float)((Math.random() - 0.5)/10);
     }
 
     private void toggleYDirection() {

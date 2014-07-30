@@ -10,6 +10,6 @@ public interface IFGameEvents {
     
     void playerWin();
     
-    void playerLose();
+    void playerLose(int number);
 
 }

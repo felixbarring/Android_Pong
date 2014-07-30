@@ -247,6 +247,7 @@ public class PongRenderer implements Renderer, IFGameEvents {
 		// and i cant continue restarting it all the time.
 		// I am currently spending about 80% of the time 
 		// waiting for it to restart...
+		
         MenuActivity.dis.gameOver();
     }
 

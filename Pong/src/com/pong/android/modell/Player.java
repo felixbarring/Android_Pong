@@ -2,7 +2,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 Felix Bärring <felixbarring@gmail.com>.
+ * Copyright 2014 Felix Bï¿½rring <felixbarring@gmail.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,15 @@
  */
 
 /**
- * @author Felix Bärring <felixbarring@gmail.com>
+ * @author Felix Bï¿½rring <felixbarring@gmail.com>
  */
 
 
 package com.pong.android.modell;
+
+import com.pong.android.PongRenderer;
+
+import android.opengl.Matrix;
 
 public class Player extends Rectangle {
 
@@ -43,7 +47,13 @@ public class Player extends Rectangle {
     }
 
     public void touch(Float f) {
-        target = f + (float) (HEIGHT / 2);
+        
+        // multiplyMV(float[] resultVec, int resultVecOffset, float[] lhsMat, int lhsMatOffset, float[] rhsVec, int rhsVecOffset)
+        final float[] rhsV = {0.0f, f, 0.0f, 0.0f};
+        final float[] resultVec = new float[4];
+        Matrix.multiplyMV(resultVec, 0, PongRenderer.projectionMatrix, 0, rhsV, 0);
+        
+        target = (f+(f-resultVec[1])) + (float) (HEIGHT / 2);
     }
 
     public void setDirection(int i) {
