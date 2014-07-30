@@ -29,6 +29,7 @@
 
 package com.pong.android.modell;
 
+import com.pong.android.IFGameEvents;
 import com.pong.android.PongRenderer;
 
 public class Ball extends Rectangle {
@@ -38,10 +39,13 @@ public class Ball extends Rectangle {
     
     private int yDirection = -1;
     private float ySpeed = 0.005f;
+    
+    private final IFGameEvents gameEvents;
 
     public Ball(float w, float h,
-        float topLX, float topLY, int offsetVertexData) {
+        float topLX, float topLY, int offsetVertexData, IFGameEvents gameEvents) {
         super(w, h, topLX, topLY, offsetVertexData);
+        this.gameEvents = gameEvents;
     }
 
     public void tick() {
@@ -56,10 +60,10 @@ public class Ball extends Rectangle {
             toggleXDirection();
             move(2 * xSpeed * xDirection, 0.0f);
         } else if(topLeftX < -1) {
-			// Opponent loses
-	} else if(topLeftX > 1) {
-			// Player loses
-	} else {
+            gameEvents.playerLose();
+        } else if(topLeftX > 1) {
+            gameEvents.playerWin();
+        } else {
             move(xSpeed * xDirection, ySpeed * yDirection);
         }
     }

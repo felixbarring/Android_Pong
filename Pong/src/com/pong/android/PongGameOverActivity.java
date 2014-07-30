@@ -1,9 +1,11 @@
 package com.pong.android;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class PongGameOverActivity extends ActionBarActivity {
 
@@ -31,4 +33,13 @@ public class PongGameOverActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    public void btn1Clicked(View view) {
+        startActivity(new Intent(this, PongActivity.class));
+    }
+    
+    public void btn2Clicked(View view) {
+        startActivity(new Intent(this, MenuActivity.class));
+    }
+    
 }

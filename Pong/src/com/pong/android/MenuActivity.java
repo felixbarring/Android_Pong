@@ -8,10 +8,13 @@ import android.view.MenuItem;
 import android.view.View;
 
 public class MenuActivity extends ActionBarActivity {
+    
+    public static MenuActivity dis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dis = this;
         setContentView(R.layout.activity_menu);
     }
 
@@ -37,5 +40,9 @@ public class MenuActivity extends ActionBarActivity {
     
     public void btn1Clicked(View view) {
         startActivity(new Intent(this, PongActivity.class));
+    }
+    
+    public void gameOver(){
+        startActivity(new Intent(this, PongGameOverActivity.class));
     }
 }

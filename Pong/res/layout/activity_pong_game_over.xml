@@ -25,7 +25,8 @@
         android:layout_alignLeft="@+id/multiAutoCompleteTextView1"
         android:layout_alignRight="@+id/multiAutoCompleteTextView1"
         android:layout_below="@+id/multiAutoCompleteTextView1"
-        android:text="Button" />
+        android:onClick="btn1Clicked"
+        android:text="@string/btn_game_over_retry" />
 
     <Button
         android:id="@+id/button2"
@@ -34,6 +35,7 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_alignRight="@+id/button1"
         android:layout_below="@+id/button1"
-        android:text="Button" />
+        android:onClick="btn2Clicked"
+        android:text="@string/btn_game_over_return"/>
 
 </RelativeLayout>

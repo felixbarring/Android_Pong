@@ -37,7 +37,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
@@ -48,7 +50,7 @@ import com.pong.android.modell.Opponent;
 import com.pong.android.modell.Player;
 import com.pong.android.util.ShaderUtility;
 
-public class PongRenderer implements Renderer {
+public class PongRenderer implements Renderer, IFGameEvents{
     private static final String A_POSITION = "a_Position";
     private static final String U_COLOR = "u_Color";
     private static final String U_POSITION_OFFSET = "u_offset";
@@ -71,13 +73,16 @@ public class PongRenderer implements Renderer {
     public static Board board;
     
     public static LinkedBlockingQueue<Float> queueOfTouchCoordinates = new LinkedBlockingQueue<Float>();
+    
+    private final Activity activity;
 
-    public PongRenderer(Context context) {
-        this.context = context;
+    public PongRenderer(Activity activity) {
+        this.context = activity;
+        this.activity = activity; 
 
         player = new Player(0.1f, 0.6f, -0.95f, 0.3f, 0);
         opponent = new Opponent(0.1f, 0.6f, 0.85f, 0.3f, 6);
-        ball = new Ball(0.1f, 0.1f, -0.05f, 0.05f, 12);
+        ball = new Ball(0.1f, 0.1f, -0.05f, 0.05f, 12, this);
         board = new Board(2.0f, 2.0f, -1.0f, 1.0f, 18);
 
         float[] tableVerticesWithTriangles =
@@ -216,6 +221,19 @@ public class PongRenderer implements Renderer {
         ball.tick();
         opponent.tick();
         player.tick();
+    }
+
+    
+    // Interface IFGameEvents
+    
+    @Override
+    public void playerWin() {
+        MenuActivity.dis.gameOver();
+    }
+
+    @Override
+    public void playerLose() {
+        MenuActivity.dis.gameOver();
     }
     
 }
