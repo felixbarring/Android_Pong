@@ -39,7 +39,7 @@ public class Ball extends Rectangle {
     private float xSpeed = 0.005f;
 
     private int yDirection = -1;
-    private float ySpeed = 0.005f;
+    private float ySpeed = 0.0f;
 
     private float speedIncrease = 0.002f;
 

@@ -235,7 +235,7 @@ public class PongRenderer implements Renderer, IFGameEvents {
 
     @Override
     public void playerWin() {
-        MenuActivity.dis.gameOver(5);
+        MenuActivity.dis.gameOver();
     }
 
     @Override
