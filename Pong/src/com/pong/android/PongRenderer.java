@@ -41,7 +41,6 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
-import android.widget.Toast;
 
 import com.pong.android.modell.Ball;
 import com.pong.android.modell.Board;
@@ -235,19 +234,20 @@ public class PongRenderer implements Renderer, IFGameEvents {
 
     @Override
     public void playerWin() {
-        MenuActivity.dis.gameOver();
+        // Lol will never happen
+        MenuActivity.dis.gameOver(5);
     }
 
     @Override
     public void playerLose(int number) {
-		// The intention is to make a toast 
-		// disiplaying the amount of hits the player 
-		// managed to survive.
-		// Hovever Eclipse is crashing about once in two minutes
-		// and i cant continue restarting it all the time.
-		// I am currently spending about 80% of the time 
-		// waiting for it to restart...
-        MenuActivity.dis.gameOver();
+        // The intention is to make a toast
+        // disiplaying the amount of hits the player
+        // managed to survive.
+        // Hovever Eclipse is crashing about once in two minutes
+        // and i cant continue restarting it all the time.
+        // I am currently spending about 80% of the time
+        // waiting for it to restart...
+        MenuActivity.dis.gameOver(number);
     }
 
 }

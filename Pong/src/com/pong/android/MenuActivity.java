@@ -43,7 +43,8 @@ public class MenuActivity extends ActionBarActivity {
         startActivity(new Intent(this, PongActivity.class));
     }
 
-    public void gameOver() {
+    public void gameOver(int number) {
         startActivity(new Intent(this, PongGameOverActivity.class));
+        PongGameOverActivity.dis.updateText(number);
     }
 }

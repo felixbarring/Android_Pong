@@ -1,18 +1,22 @@
 package com.pong.android;
 
-import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class PongGameOverActivity extends ActionBarActivity {
-
+    
+    static PongGameOverActivity dis;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pong_game_over);
+        dis = this;
     }
 
     @Override
@@ -40,6 +44,12 @@ public class PongGameOverActivity extends ActionBarActivity {
     
     public void btn2Clicked(View view) {
         startActivity(new Intent(this, MenuActivity.class));
+    }
+    
+    
+    public void updateText(int number){
+        TextView tv = (TextView) findViewById(R.id.textView1);
+        tv.setText("You managed to survive for "+number+" rounds");
     }
     
 }
