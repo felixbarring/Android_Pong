@@ -10,15 +10,27 @@ import android.widget.TextView;
 
 public class PongGameOverActivity extends ActionBarActivity {
     
-    static PongGameOverActivity dis;
+    public static int number = 0;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pong_game_over);
-        dis = this;
+        updateText();
     }
-
+ 
+    @Override 
+    public void onStart(){
+        super.onStart();
+        updateText();
+    }
+    
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateText();
+    }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -47,7 +59,7 @@ public class PongGameOverActivity extends ActionBarActivity {
     }
     
     
-    public void updateText(int number){
+    private void updateText(){
         TextView tv = (TextView) findViewById(R.id.textView1);
         tv.setText("You managed to survive for "+number+" rounds");
     }
