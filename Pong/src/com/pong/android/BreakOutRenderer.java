@@ -46,7 +46,6 @@ import android.opengl.Matrix;
 
 import com.pong.android.modell.Ball;
 import com.pong.android.modell.Board;
-import com.pong.android.modell.BreakOutBrick;
 import com.pong.android.modell.Player;
 import com.pong.android.util.ShaderUtility;
 
@@ -189,9 +188,6 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     public void onDrawFrame(GL10 glUnused) {
         // Update game logic
         gameTick();
-        
-        int size = queueOfTouchCoordinates.size();
-        
         for (Float i : queueOfTouchCoordinates) {
             player.touch(i);
         }
@@ -209,9 +205,6 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         // All other components shall be drawn in white
         GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         player.draw();
-        
-        // Draw the bricks :-3
-        
         
     }
 
