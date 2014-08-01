@@ -46,6 +46,7 @@ import android.opengl.Matrix;
 
 import com.pong.android.modell.Ball;
 import com.pong.android.modell.Board;
+import com.pong.android.modell.Opponent;
 import com.pong.android.modell.Player;
 import com.pong.android.util.ShaderUtility;
 
@@ -68,9 +69,10 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     public static final float[] projectionMatrix = new float[16];
 
     public static Player player;
+    public static Opponent opponent;
     public static Ball ball;
     public static Board board;
-    
+
     public static LinkedBlockingQueue<Float> queueOfTouchCoordinates =
         new LinkedBlockingQueue<Float>();
 
@@ -81,9 +83,10 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         this.activity = activity;
 
         player = new Player(0.1f, 0.6f, -0.95f, 0.3f, 0);
-        ball = new Ball(0.1f, 0.1f, -0.05f, 0.05f, 6, this);
-        board = new Board(2.0f, 2.0f, -1.0f, 1.0f, 12);
-        
+        opponent = new Opponent(0.1f, 0.6f, 0.85f, 0.3f, 6);
+        ball = new Ball(0.1f, 0.1f, -0.05f, 0.05f, 12, this);
+        board = new Board(2.0f, 2.0f, -1.0f, 1.0f, 18);
+
         float[] tableVerticesWithTriangles =
             {
                 // Player Triangle 1
@@ -100,6 +103,21 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 player.topLeftY,
                 player.topLeftX + player.WIDTH,
                 player.topLeftY - player.HEIGHT,
+
+                // Opponent triangle 1
+                opponent.topLeftX,
+                opponent.topLeftY,
+                opponent.topLeftX,
+                opponent.topLeftY - opponent.HEIGHT,
+                opponent.topLeftX + opponent.WIDTH,
+                opponent.topLeftY - opponent.HEIGHT,
+                // Opponent triangle 2
+                opponent.topLeftX + opponent.WIDTH,
+                opponent.topLeftY,
+                opponent.topLeftX,
+                opponent.topLeftY,
+                opponent.topLeftX + opponent.WIDTH,
+                opponent.topLeftY - opponent.HEIGHT,
 
                 // Ball triangle 1
                 ball.topLeftX,
@@ -125,7 +143,7 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 board.topLeftX + board.WIDTH, board.topLeftY, board.topLeftX,
                 board.topLeftY, board.topLeftX + board.WIDTH,
                 board.topLeftY - board.HEIGHT,
-                
+
             };
 
         vertexData =
@@ -205,10 +223,13 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         // All other components shall be drawn in white
         GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         player.draw();
-        
+        opponent.draw();
+        ball.draw();
     }
 
     private void gameTick() {
+        ball.tick();
+        opponent.tick();
         player.tick();
     }
 
@@ -216,13 +237,20 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
 
     @Override
     public void playerWin() {
+        // Lol will never happen
         MenuActivity.dis.gameOver(5);
     }
 
     @Override
     public void playerLose(int number) {
+        // The intention is to make a toast
+        // disiplaying the amount of hits the player
+        // managed to survive.
+        // Hovever Eclipse is crashing about once in two minutes
+        // and i cant continue restarting it all the time.
+        // I am currently spending about 80% of the time
+        // waiting for it to restart...
         MenuActivity.dis.gameOver(number);
     }
 
 }
-
