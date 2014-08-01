@@ -25,6 +25,7 @@
         android:layout_alignLeft="@+id/button1"
         android:layout_alignRight="@+id/button1"
         android:layout_below="@+id/button1"
+        android:onClick="btn2Clicked"
         android:text="@string/btn_breakout" />
 
 </RelativeLayout>

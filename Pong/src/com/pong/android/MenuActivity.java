@@ -42,6 +42,10 @@ public class MenuActivity extends ActionBarActivity {
     public void btn1Clicked(View view) {
         startActivity(new Intent(this, PongActivity.class));
     }
+    
+    public void btn2Clicked(View view) {
+        startActivity(new Intent(this, BreakOutActivity.class));
+    }
 
     public void gameOver(int number) {
         PongGameOverActivity.number = number;

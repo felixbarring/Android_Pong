@@ -46,7 +46,7 @@ public class BreakOutActivity extends Activity {
                 if (event != null) {
                     final float normalizedY =
                         -(event.getY() / (float) v.getHeight() * 2 - 1);
-                    PongRenderer.queueOfTouchCoordinates.add(normalizedY);
+                    BreakOutRenderer.queueOfTouchCoordinates.add(normalizedY);
                 }
                 return true;
             }
