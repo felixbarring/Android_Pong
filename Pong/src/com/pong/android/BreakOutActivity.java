@@ -19,7 +19,7 @@ public class BreakOutActivity extends Activity {
         super.onCreate(savedInstanceState);
         glSurfaceView = new GLSurfaceView(this);
 
-        final PongRenderer renderer = new PongRenderer(this);
+        final BreakOutRenderer renderer = new BreakOutRenderer(this);
 
         boolean supportsOpenGl20 =
             ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE))

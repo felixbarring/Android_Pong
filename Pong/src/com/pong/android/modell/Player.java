@@ -52,7 +52,6 @@ public class Player extends Rectangle {
         final float[] rhsV = {0.0f, f, 0.0f, 0.0f};
         final float[] resultVec = new float[4];
         Matrix.multiplyMV(resultVec, 0, PongRenderer.projectionMatrix, 0, rhsV, 0);
-        
         target = (f+(f-resultVec[1])) + (float) (HEIGHT / 2);
     }
 
