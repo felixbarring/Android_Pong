@@ -3,7 +3,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 Felix Bärring <felixbarring@gmail.com>.
+ * Copyright 2014 Felix Bï¿½rring <felixbarring@gmail.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +25,8 @@
  */
 
 /**
- * @author Felix Bärring <felixbarring@gmail.com>
+ * @author Felix Bï¿½rring <felixbarring@gmail.com>
  */
-
 
 
 package com.pong.android;

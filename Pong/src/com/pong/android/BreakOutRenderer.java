@@ -2,7 +2,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 Felix Bärring <felixbarring@gmail.com>.
+ * Copyright 2014 Felix Bï¿½rring <felixbarring@gmail.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
  */
 
 /**
- * @author Felix Bärring <felixbarring@gmail.com>
+ * @author Felix Bï¿½rring <felixbarring@gmail.com>
  */
 
 
@@ -72,8 +72,6 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     public static Ball ball;
     public static Board board;
     
-    public static BreakOutBrick[] bricks = new BreakOutBrick[10];
-
     public static LinkedBlockingQueue<Float> queueOfTouchCoordinates =
         new LinkedBlockingQueue<Float>();
 
@@ -84,14 +82,9 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         this.activity = activity;
 
         player = new Player(0.1f, 0.6f, -0.95f, 0.3f, 0);
-        ball = new Ball(0.1f, 0.1f, -0.05f, 0.05f, 12, this);
-        board = new Board(2.0f, 2.0f, -1.0f, 1.0f, 18);
+        ball = new Ball(0.1f, 0.1f, -0.05f, 0.05f, 6, this);
+        board = new Board(2.0f, 2.0f, -1.0f, 1.0f, 12);
         
-        BreakOutBrick brick = new BreakOutBrick(0.1f, 0.2f, 0.0f, 0.0f,
-            0.8f, 0.1f, 24, uColorLocation, 0.5f, 0.5f, 0.5f);
-        
-        bricks[0] = brick;
-
         float[] tableVerticesWithTriangles =
             {
                 // Player Triangle 1
@@ -134,16 +127,6 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 board.topLeftY, board.topLeftX + board.WIDTH,
                 board.topLeftY - board.HEIGHT,
                 
-                // Brick triangle 1
-                brick.topLeftX, brick.topLeftY, brick.topLeftX,
-                brick.topLeftY - brick.HEIGHT,
-                brick.topLeftX + brick.WIDTH,
-                brick.topLeftY - brick.HEIGHT,
-                // Brick triangle 2
-                brick.topLeftX + brick.WIDTH, brick.topLeftY, brick.topLeftX,
-                brick.topLeftY, brick.topLeftX + brick.WIDTH,
-                brick.topLeftY - brick.HEIGHT,
-
             };
 
         vertexData =
@@ -226,15 +209,13 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         // All other components shall be drawn in white
         GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         player.draw();
-        ball.draw();
         
         // Draw the bricks :-3
-        bricks[0].draw();
+        
         
     }
 
     private void gameTick() {
-        ball.tick();
         player.tick();
     }
 
