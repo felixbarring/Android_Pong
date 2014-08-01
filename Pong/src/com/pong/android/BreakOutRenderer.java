@@ -1,3 +1,33 @@
+
+/*
+ * The MIT License
+ *
+ * Copyright 2014 Felix Bärring <felixbarring@gmail.com>.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+/**
+ * @author Felix Bärring <felixbarring@gmail.com>
+ */
+
+
 package com.pong.android;
 
 import java.nio.ByteBuffer;
@@ -8,17 +38,17 @@ import java.util.concurrent.LinkedBlockingQueue;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import com.pong.android.modell.Ball;
-import com.pong.android.modell.Board;
-import com.pong.android.modell.Opponent;
-import com.pong.android.modell.Player;
-import com.pong.android.util.ShaderUtility;
-
 import android.app.Activity;
 import android.content.Context;
 import android.opengl.GLES20;
-import android.opengl.Matrix;
 import android.opengl.GLSurfaceView.Renderer;
+import android.opengl.Matrix;
+
+import com.pong.android.modell.Ball;
+import com.pong.android.modell.Board;
+import com.pong.android.modell.BreakOutBrick;
+import com.pong.android.modell.Player;
+import com.pong.android.util.ShaderUtility;
 
 public class BreakOutRenderer implements Renderer, IFGameEvents {
     
@@ -39,9 +69,10 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     public static final float[] projectionMatrix = new float[16];
 
     public static Player player;
-    public static Opponent opponent;
     public static Ball ball;
     public static Board board;
+    
+    public static BreakOutBrick[] bricks = new BreakOutBrick[10];
 
     public static LinkedBlockingQueue<Float> queueOfTouchCoordinates =
         new LinkedBlockingQueue<Float>();
@@ -53,9 +84,13 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         this.activity = activity;
 
         player = new Player(0.1f, 0.6f, -0.95f, 0.3f, 0);
-        opponent = new Opponent(0.1f, 0.6f, 0.85f, 0.3f, 6);
         ball = new Ball(0.1f, 0.1f, -0.05f, 0.05f, 12, this);
         board = new Board(2.0f, 2.0f, -1.0f, 1.0f, 18);
+        
+        BreakOutBrick brick = new BreakOutBrick(0.1f, 0.2f, 0.0f, 0.0f,
+            0.8f, 0.1f, 24, uColorLocation, 0.5f, 0.5f, 0.5f);
+        
+        bricks[0] = brick;
 
         float[] tableVerticesWithTriangles =
             {
@@ -73,21 +108,6 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 player.topLeftY,
                 player.topLeftX + player.WIDTH,
                 player.topLeftY - player.HEIGHT,
-
-                // Opponent triangle 1
-                opponent.topLeftX,
-                opponent.topLeftY,
-                opponent.topLeftX,
-                opponent.topLeftY - opponent.HEIGHT,
-                opponent.topLeftX + opponent.WIDTH,
-                opponent.topLeftY - opponent.HEIGHT,
-                // Opponent triangle 2
-                opponent.topLeftX + opponent.WIDTH,
-                opponent.topLeftY,
-                opponent.topLeftX,
-                opponent.topLeftY,
-                opponent.topLeftX + opponent.WIDTH,
-                opponent.topLeftY - opponent.HEIGHT,
 
                 // Ball triangle 1
                 ball.topLeftX,
@@ -113,6 +133,16 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 board.topLeftX + board.WIDTH, board.topLeftY, board.topLeftX,
                 board.topLeftY, board.topLeftX + board.WIDTH,
                 board.topLeftY - board.HEIGHT,
+                
+                // Brick triangle 1
+                brick.topLeftX, brick.topLeftY, brick.topLeftX,
+                brick.topLeftY - brick.HEIGHT,
+                brick.topLeftX + brick.WIDTH,
+                brick.topLeftY - brick.HEIGHT,
+                // Brick triangle 2
+                brick.topLeftX + brick.WIDTH, brick.topLeftY, brick.topLeftX,
+                brick.topLeftY, brick.topLeftX + brick.WIDTH,
+                brick.topLeftY - brick.HEIGHT,
 
             };
 
@@ -196,13 +226,15 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         // All other components shall be drawn in white
         GLES20.glUniform4f(uColorLocation, 1.0f, 1.0f, 1.0f, 1.0f);
         player.draw();
-        opponent.draw();
         ball.draw();
+        
+        // Draw the bricks :-3
+        bricks[0].draw();
+        
     }
 
     private void gameTick() {
         ball.tick();
-        opponent.tick();
         player.tick();
     }
 
