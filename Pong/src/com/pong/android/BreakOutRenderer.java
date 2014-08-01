@@ -210,7 +210,6 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
 
     @Override
     public void playerWin() {
-        // Lol will never happen
         MenuActivity.dis.gameOver(5);
     }
 
