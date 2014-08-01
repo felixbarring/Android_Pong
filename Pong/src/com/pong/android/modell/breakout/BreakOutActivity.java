@@ -29,7 +29,7 @@
  */
 
 
-package com.pong.android;
+package com.pong.android.modell.breakout;
 
 import android.app.Activity;
 import android.app.ActivityManager;

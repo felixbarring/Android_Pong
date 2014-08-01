@@ -1,4 +1,3 @@
-
 /*
  * The MIT License
  *
@@ -27,55 +26,21 @@
  * @author Felix B�rring <felixbarring@gmail.com>
  */
 
+package com.pong.android.modell.pong;
 
-package com.pong.android.modell;
 
-import com.pong.android.PongRenderer;
+public class PongOpponent extends Rectangle {
 
-import android.opengl.Matrix;
-
-public class Player extends Rectangle {
-
-    private float speed = 0.05f;
-    private int direction = 0;
-
-    private Float target = 0f;
-
-    public Player(float w, float h, float topLX, float topLY,
+    public PongOpponent(float w, float h, float topLX, float topLY,
         int offsetVertexData) {
         super(w, h, topLX, topLY, offsetVertexData);
     }
 
-    public void touch(Float f) {
-        
-        // multiplyMV(float[] resultVec, int resultVecOffset, float[] lhsMat, int lhsMatOffset, float[] rhsVec, int rhsVecOffset)
-        final float[] rhsV = {0.0f, f, 0.0f, 0.0f};
-        final float[] resultVec = new float[4];
-        Matrix.multiplyMV(resultVec, 0, PongRenderer.projectionMatrix, 0, rhsV, 0);
-        target = (f+(f-resultVec[1])) + (float) (HEIGHT / 2);
-    }
-
-    public void setDirection(int i) {
-        direction = i;
-    }
-
     public void tick() {
-        if (target >= topLeftY) {
-            // If the distance to the target is less than the speed
-            // then the location will be set to the target coordinate.
-            if (target <= topLeftY + speed) {
-                topLeftY = target;
-            } else {
-                move(0.0f, speed);
-            }
-        } else {
-            if (target >= topLeftY - speed) {
-                topLeftY = target;
-            } else {
-                move(0.0f, -speed);
-            }
-        }
-        direction = 0;
+        float ballCenter =
+            PongRenderer.ball.topLeftY - (PongRenderer.ball.HEIGHT / 2);
+        float opponentCenter = this.topLeftY - (HEIGHT / 2);
+        move(0.0f, ballCenter - opponentCenter);
     }
 
 }

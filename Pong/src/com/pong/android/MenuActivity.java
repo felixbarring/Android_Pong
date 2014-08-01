@@ -1,5 +1,8 @@
 package com.pong.android;
 
+import com.pong.android.modell.breakout.BreakOutActivity;
+import com.pong.android.modell.pong.PongGameOverActivity;
+
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;

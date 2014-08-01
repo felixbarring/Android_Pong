@@ -1,8 +1,7 @@
-
 /*
  * The MIT License
  *
- * Copyright 2014 Felix Bärring <felixbarring@gmail.com>.
+ * Copyright 2014 Felix Bï¿½rring <felixbarring@gmail.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,24 +23,23 @@
  */
 
 /**
- * @author Felix Bärring <felixbarring@gmail.com>
+ * @author Felix Bï¿½rring <felixbarring@gmail.com>
  */
 
-package com.pong.android.modell;
+package com.pong.android.modell.breakout;
 
-import com.pong.android.PongRenderer;
+import android.opengl.GLES20;
 
-public class Opponent extends Rectangle{
+public class BreakOutPlayer extends Rectangle {
 
-    public Opponent(float w, float h, float topLX, float topLY,
-        int offsetVertexData) {
-        super(w, h, topLX, topLY, offsetVertexData);
-    }
-    
-    public void tick(){
-        float ballCenter = PongRenderer.ball.topLeftY-(PongRenderer.ball.HEIGHT/2);
-        float opponentCenter = this.topLeftY-(HEIGHT/2);
-        move(0.0f, ballCenter - opponentCenter);
+    public BreakOutPlayer(float w, float h, float topLX, float topLY,
+        int offsetVertexData, float r, float g, float b) {
+        super(w, h, topLX, topLY, offsetVertexData, uPositionOffsetLocation, uColorLocation, r, g, b);
+        // TODO Auto-generated constructor stub
     }
 
+    @Override
+    public void draw() {
+        super.draw();
+    }
 }

@@ -1,4 +1,11 @@
-package com.pong.android;
+package com.pong.android.modell.pong;
+
+import com.pong.android.MenuActivity;
+import com.pong.android.PongActivity;
+import com.pong.android.R;
+import com.pong.android.R.id;
+import com.pong.android.R.layout;
+import com.pong.android.R.menu;
 
 import android.content.Intent;
 import android.os.Bundle;

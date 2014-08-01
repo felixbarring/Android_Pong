@@ -26,14 +26,11 @@
  * @author Felix B�rring <felixbarring@gmail.com>
  */
 
-package com.pong.android.modell;
-
-import android.widget.Toast;
+package com.pong.android.modell.pong;
 
 import com.pong.android.IFGameEvents;
-import com.pong.android.PongRenderer;
 
-public class Ball extends Rectangle {
+public class PongBall extends Rectangle {
 
     private int xDirection = -1;
     private float xSpeed = 0.005f;
@@ -44,10 +41,10 @@ public class Ball extends Rectangle {
     private float speedIncrease = 0.002f;
 
     private final IFGameEvents gameEvents;
-    
+
     private int successfullHits = 0;
 
-    public Ball(float w, float h, float topLX, float topLY,
+    public PongBall(float w, float h, float topLX, float topLY,
         int offsetVertexData, IFGameEvents gameEvents) {
         super(w, h, topLX, topLY, offsetVertexData);
         this.gameEvents = gameEvents;
@@ -64,15 +61,15 @@ public class Ball extends Rectangle {
                 move(2 * xSpeed * xDirection, 0.0f);
                 successfullHits++;
             } else {
-         	   gameEvents.playerLose(successfullHits);
-			}
-        } else if (topLeftX+WIDTH > 0.85) {
+                gameEvents.playerLose(successfullHits);
+            }
+        } else if (topLeftX + WIDTH > 0.85) {
             if (PongRenderer.opponent.intersects(this)) {
                 toggleXDirection();
                 move(2 * xSpeed * xDirection, 0.0f);
             } else {
-	            gameEvents.playerWin();
-			}
+                gameEvents.playerWin();
+            }
         } else {
             move(xSpeed * xDirection, ySpeed * yDirection);
         }
@@ -81,7 +78,7 @@ public class Ball extends Rectangle {
     private void toggleXDirection() {
         xDirection = -xDirection;
         xSpeed = xSpeed + speedIncrease;
-        ySpeed = ySpeed + (float)((Math.random() - 0.5)/50);
+        ySpeed = ySpeed + (float) ((Math.random() - 0.5) / 50);
     }
 
     private void toggleYDirection() {

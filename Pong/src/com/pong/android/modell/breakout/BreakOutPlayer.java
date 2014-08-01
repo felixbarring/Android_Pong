@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 Felix Bärring <felixbarring@gmail.com>.
+ * Copyright 2014 Felix Bï¿½rring <felixbarring@gmail.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,39 +23,23 @@
  */
 
 /**
- * @author Felix Bärring <felixbarring@gmail.com>
+ * @author Felix Bï¿½rring <felixbarring@gmail.com>
  */
 
-package com.pong.android.modell;
+package com.pong.android.modell.breakout;
 
 import android.opengl.GLES20;
 
-public class BreakOutBrick extends Rectangle {
+public class BreakOutPlayer extends Rectangle {
 
-    private final int uColorLocation;
-
-    private final float RED;
-    private final float GREEN;
-    private final float BLUE;
-
-    public BreakOutBrick(float w, float h, float topLX, float topLY,
-        float topLeftX, float topLeftY, int offsetVertexData,
-        int uColorLocation, float r, float g, float b) {
-        super(w, h, topLX, topLY, offsetVertexData);
-
-        this.topLeftX = topLeftX;
-        this.topLeftY = topLeftY;
-        
-        this.uColorLocation = uColorLocation;
-        RED = r;
-        GREEN = g;
-        BLUE = b;
+    public BreakOutPlayer(float w, float h, float topLX, float topLY,
+        int offsetVertexData, float r, float g, float b) {
+        super(w, h, topLX, topLY, offsetVertexData, r, g, b);
+        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void draw() {
-        GLES20.glUniform4f(uColorLocation, RED, GREEN, BLUE, 1.0f);
         super.draw();
     }
-
 }

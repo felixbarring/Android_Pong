@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2014 Felix Bärring <felixbarring@gmail.com>.
+ * Copyright 2014 Felix Bï¿½rring <felixbarring@gmail.com>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,23 +23,15 @@
  */
 
 /**
- * @author Felix Bärring <felixbarring@gmail.com>
+ * @author Felix Bï¿½rring <felixbarring@gmail.com>
  */
 
-package com.pong.android.modell;
+package com.pong.android.modell.breakout;
 
 import static android.opengl.GLES20.GL_TRIANGLES;
 import static android.opengl.GLES20.glDrawArrays;
 import static android.opengl.GLES20.glUniform4f;
 
-import com.pong.android.PongRenderer;
-
-/**
- * Designed to be extended by other classes.
- * 
- * @author felix
- * 
- */
 public abstract class Rectangle {
 
     public final float WIDTH;
@@ -52,8 +44,12 @@ public abstract class Rectangle {
     public float topLeftX;
     public float topLeftY;
 
+    protected final float RED;
+    protected final float GREEN;
+    protected final float BLUE;
+
     public Rectangle(float w, float h, float topLX, float topLY,
-        int offsetVertexData) {
+        int offsetVertexData, float r, float g, float b) {
         WIDTH = w;
         HEIGHT = h;
         INITIAL_TOPLEFT_X = topLX;
@@ -61,6 +57,10 @@ public abstract class Rectangle {
         topLeftX = topLX;
         topLeftY = topLY;
         OFFSET_VERTEX_DATA = offsetVertexData;
+
+        RED = r;
+        GREEN = g;
+        BLUE = b;
     }
 
     // Write a test for this later!
@@ -109,7 +109,9 @@ public abstract class Rectangle {
      * from the OFFSET_VERTEX_DATA to OFFSET_VERTEX_DATA+6.
      */
     public void draw() {
-        glUniform4f(PongRenderer.uPositionOffsetLocation, topLeftX
+        // glUniform4f(uColorLocation, RED, GREEN, BLUE, 0.0f);
+        glUniform4f(BreakOutRenderer.uColorLocation, 0.0f, 1.0f, 0.0f, 0.0f);
+        glUniform4f(BreakOutRenderer.uPositionOffsetLocation, topLeftX
             - INITIAL_TOPLEFT_X, topLeftY - INITIAL_TOPLEFT_Y, 0.0f, 0.0f);
         glDrawArrays(GL_TRIANGLES, OFFSET_VERTEX_DATA, 6);
     }
