@@ -58,7 +58,6 @@ public class PongGameOverActivity extends ActionBarActivity {
         startActivity(new Intent(this, MenuActivity.class));
     }
     
-    
     private void updateText(){
         TextView tv = (TextView) findViewById(R.id.textView1);
         tv.setText("You managed to survive for "+number+" rounds");
