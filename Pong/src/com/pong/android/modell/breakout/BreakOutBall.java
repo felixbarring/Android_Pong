@@ -80,6 +80,9 @@ public class BreakOutBall extends Rectangle {
                 move(2 * xSpeed * xDirection, 0.0f);
                 brick.destroy();
                 bricks.remove(brick);
+                if(bricks.size() == 0){
+                    gameEvents.playerWin();
+                }
             }
         }
         move(xSpeed * xDirection, ySpeed * yDirection);

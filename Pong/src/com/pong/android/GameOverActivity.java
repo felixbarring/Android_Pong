@@ -1,7 +1,5 @@
-package com.pong.android.modell.pong;
+package com.pong.android;
 
-import com.pong.android.MenuActivity;
-import com.pong.android.PongActivity;
 import com.pong.android.R;
 import com.pong.android.R.id;
 import com.pong.android.R.layout;
@@ -15,9 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-public class PongGameOverActivity extends ActionBarActivity {
+public class GameOverActivity extends ActionBarActivity {
     
-    public static int number = 0;
+    public static String message = "";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +65,7 @@ public class PongGameOverActivity extends ActionBarActivity {
     
     private void updateText(){
         TextView tv = (TextView) findViewById(R.id.textView1);
-        tv.setText("You managed to survive for "+number+" rounds");
+        tv.setText(message);
     }
     
 }

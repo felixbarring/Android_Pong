@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.pong.android.modell.pong.PongGameOverActivity"
+            android:name="com.pong.android.GameOverActivity"
             android:label="@string/title_activity_pong_game_over" 
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >>
         </activity>

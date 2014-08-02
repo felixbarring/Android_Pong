@@ -234,12 +234,12 @@ public class PongRenderer implements Renderer, IFGameEvents {
     @Override
     public void playerWin() {
         // Lol will never happen
-        MenuActivity.dis.gameOver(5);
+        MenuActivity.dis.gameOver("This cannot happen :-)");
     }
 
     @Override
     public void playerLose(int number) {
-        MenuActivity.dis.gameOver(number);
+        MenuActivity.dis.gameOver("You survived for "+number+" amount of rounds!");
     }
 
 }

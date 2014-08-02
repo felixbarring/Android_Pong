@@ -1,7 +1,6 @@
 package com.pong.android;
 
 import com.pong.android.modell.breakout.BreakOutActivity;
-import com.pong.android.modell.pong.PongGameOverActivity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
@@ -50,8 +49,8 @@ public class MenuActivity extends ActionBarActivity {
         startActivity(new Intent(this, BreakOutActivity.class));
     }
 
-    public void gameOver(int number) {
-        PongGameOverActivity.number = number;
-        startActivity(new Intent(this, PongGameOverActivity.class));
+    public void gameOver(String message) {
+        GameOverActivity.message = message;
+        startActivity(new Intent(this, GameOverActivity.class));
     }
 }

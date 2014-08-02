@@ -247,12 +247,12 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     // Interface IFGameEvents
     @Override
     public void playerWin() {
-        MenuActivity.dis.gameOver(5);
+        MenuActivity.dis.gameOver("Congratulation you won, now press the button of peace!");
     }
 
     @Override
     public void playerLose(int number) {
-        MenuActivity.dis.gameOver(number);
+        MenuActivity.dis.gameOver("You survived for "+number+" amount of rounds, try again or rage quit, the choice is yours.");
     }
 
 }
