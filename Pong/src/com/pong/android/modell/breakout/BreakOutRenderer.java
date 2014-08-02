@@ -120,14 +120,14 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 player.topLeftX + player.WIDTH,
                 player.topLeftY - player.HEIGHT,
 
-                // Player Triangle 1
+                // Board Triangle 1
                 board.topLeftX,
                 board.topLeftY,
                 board.topLeftX,
                 board.topLeftY - board.HEIGHT,
                 board.topLeftX + board.WIDTH,
                 board.topLeftY - board.HEIGHT,
-                // Player Triangle 2
+                // Board Triangle 2
                 board.topLeftX + board.WIDTH,
                 board.topLeftY,
                 board.topLeftX,
@@ -143,7 +143,19 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 // Brick triangle 2
                 brick.topLeftX + brick.WIDTH, brick.topLeftY, brick.topLeftX,
                 brick.topLeftY, brick.topLeftX + brick.WIDTH,
-                brick.topLeftY - brick.HEIGHT };
+                brick.topLeftY - brick.HEIGHT,
+                
+                // Ball triangle 1
+                ball.topLeftX, ball.topLeftY, ball.topLeftX,
+                ball.topLeftY - ball.HEIGHT,
+                ball.topLeftX + ball.WIDTH,
+                ball.topLeftY - ball.HEIGHT,
+                // Ball triangle 2
+                ball.topLeftX + ball.WIDTH, ball.topLeftY, ball.topLeftX,
+                ball.topLeftY, ball.topLeftX + ball.WIDTH,
+                ball.topLeftY - ball.HEIGHT 
+            
+            };
 
         vertexData =
             ByteBuffer
