@@ -35,7 +35,7 @@ import com.pong.android.IFGameEvents;
 public class BreakOutBall extends Rectangle {
 
     private int xDirection = -1;
-    private float xSpeed = 0.005f;
+    private float xSpeed = 0.01f;
     private int yDirection = -1;
     private float ySpeed = 0.0f;
     private float speedIncrease = 0.002f;
@@ -66,20 +66,27 @@ public class BreakOutBall extends Rectangle {
             move(2 * xSpeed * xDirection, 0.0f);
             successfullHits++;
         }
-        for (Brick brick : bricks) {
+
+        if (this.topLeftX < -0.8f) {
+            gameEvents.playerLose(successfullHits);
+        } else if (this.topLeftX > 0.9f) {
+            toggleXDirection();
+        }
+
+        for (int i = 0; i < bricks.size(); i++) {
+            Brick brick = bricks.get(i);
             if (brick.intersects(this)) {
                 toggleXDirection();
                 move(2 * xSpeed * xDirection, 0.0f);
                 brick.destroy();
                 bricks.remove(brick);
-            } 
+            }
         }
         move(xSpeed * xDirection, ySpeed * yDirection);
     }
 
     private void toggleXDirection() {
         xDirection = -xDirection;
-        xSpeed = xSpeed + speedIncrease;
         ySpeed = ySpeed + (float) ((Math.random() - 0.5) / 50);
     }
 
