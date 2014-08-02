@@ -1,6 +1,0 @@
-
-In this project i have learne...
-
-Normalized device coordinates vs Orthographics projection
-Virtual coordinate space
-

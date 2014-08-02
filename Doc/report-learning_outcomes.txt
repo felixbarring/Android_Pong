@@ -1,0 +1,35 @@
+
+This project ended up being two games, 
+an impossible pong where the goal is to survive as long as possible.
+The other game is some strange variant of breakout.
+
+During the development of this project I have suffered alot from technical difficulties, 
+mainly that eclipse crashes constantly on my system (lubuntu).
+I have therfore mainly been working with a simple text editor for editing and eclilpse only for running.
+Strange errors like not being able to create new Activitys in eclipse forced me to use and old
+computer with a Windows 7 OS. Here eclipse was stable, but I was unable to run the project
+on a physical device. This all resulted in a very tedious and slow workflow where I had 
+to switch computer for what I needed to do. I would estimate that atleast 75% of my time
+spent on the project was wasted on thecnical problems instead of actually programming.
+
+In this project I have learned the following.
+
+Creating buttons and make them usefull
+Edetting xml and setup necesarry things in the project
+Switching activitys
+Accessing the view components of an Activity
+Using GLSurfaceView to use OpenGL 2.0
+The fundamentals for setting up and work OpenGL 2.0 including
+	Create vertex and fragment shaders
+	Creating a OpenGL program
+	Linking it all togheter
+Using vertex attributes to put data so that the shaders can access it
+Learned to use uniforms variables
+Drawing triangles with the help of vertices
+Controlling the color of the fragments/pixels
+Using an ortographic projection matrix so solve the different screen size problem
+and more...
+
+
+
+
