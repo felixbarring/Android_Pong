@@ -80,25 +80,25 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         this.activity = activity;
 
         player =
-            new BreakOutPlayer(0.1f, 0.4f, -0.9f, -0.2f, 0, 1.0f, 0.5f, 0.0f);
+            new BreakOutPlayer(0.1f, 0.4f, -0.9f, 0.2f, 0, 1.0f, 0.5f, 0.0f);
 
-        Rectangle brick = new Rectangle(0.1f, 0.3f, 0.8f, -0.9f, 6, 0.0f, 0.0f, 1.0f);
-        
-        bricks.add(brick);
-        
-        bricks.add(new Rectangle(0.1f, 0.3f, 0.8f, -0.6f, 6, 0.0f, 0.0f, 1.0f));
-        
-        bricks.add(new Rectangle(0.1f, 0.3f, 0.8f, -0.2f, 6, 0.0f, 0.0f, 1.0f));
-        
-        bricks.add(new Rectangle(0.1f, 0.3f, 0.8f, 0.1f, 6, 0.0f, 0.0f, 1.0f));
-        
-        bricks.add(new Rectangle(0.1f, 0.3f, 0.8f, 0.4f, 6, 0.0f, 0.0f, 1.0f));
-        
-        bricks.add(new Rectangle(0.1f, 0.3f, 0.8f, 0.8f, 6, 0.0f, 0.0f, 1.0f));
-        
+        Rectangle brick =
+            new Rectangle(0.1f, 0.2f, 0.5f, -0.7f, 6, 0.0f, 0.0f, (float)(0/3.0));
 
-        float[] tableVerticesWithTriangles = { // Player Triangle 1
-            player.topLeftX, player.topLeftY,
+		for (int j = 0; j < 3; j++){
+        	for (int i = 0; i < 6; i++) {
+        	    Rectangle brick1 =
+        	        new Rectangle(0.1f, 0.2f, 0.5f, -0.7f, 6, 0.0f, 0.0f, (float)(j/3.0));
+        	    brick1.move((float)(0.15*j), i * 0.3f);
+        	    bricks.add(brick1);
+        	}
+		}
+
+        float[] tableVerticesWithTriangles =
+            {
+                // Player Triangle 1
+                player.topLeftX,
+                player.topLeftY,
                 player.topLeftX,
                 player.topLeftY - player.HEIGHT,
                 player.topLeftX + player.WIDTH,
@@ -106,18 +106,17 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 // Player Triangle 2
                 player.topLeftX + player.WIDTH, player.topLeftY,
                 player.topLeftX, player.topLeftY,
-                player.topLeftX + player.WIDTH, player.topLeftY - player.HEIGHT,
-                
-                brick.topLeftX, brick.topLeftY,
-                brick.topLeftX,
+                player.topLeftX + player.WIDTH,
+                player.topLeftY - player.HEIGHT,
+
+                brick.topLeftX, brick.topLeftY, brick.topLeftX,
                 brick.topLeftY - brick.HEIGHT,
                 brick.topLeftX + brick.WIDTH,
                 brick.topLeftY - brick.HEIGHT,
-                // Player Triangle 2
-                brick.topLeftX + brick.WIDTH, brick.topLeftY,
-                brick.topLeftX, brick.topLeftY,
-                brick.topLeftX + brick.WIDTH, brick.topLeftY - brick.HEIGHT
-        };
+                // Brick triangle 2
+                brick.topLeftX + brick.WIDTH, brick.topLeftY, brick.topLeftX,
+                brick.topLeftY, brick.topLeftX + brick.WIDTH,
+                brick.topLeftY - brick.HEIGHT };
 
         vertexData =
             ByteBuffer
@@ -191,8 +190,8 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
             0);
 
         player.draw();
-        
-        for(Rectangle r : bricks){
+
+        for (Rectangle r : bricks) {
             r.draw();
         }
 
