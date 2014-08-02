@@ -65,16 +65,14 @@ public class BreakOutBall extends Rectangle {
             toggleXDirection();
             move(2 * xSpeed * xDirection, 0.0f);
             successfullHits++;
-        } else {
-            // gameEvents.playerLose(successfullHits);
         }
-        for (Rectangle brick : bricks) {
+        for (Brick brick : bricks) {
             if (brick.intersects(this)) {
                 toggleXDirection();
                 move(2 * xSpeed * xDirection, 0.0f);
-            } else {
-                // gameEvents.playerWin();
-            }
+                brick.destroy();
+                bricks.remove(brick);
+            } 
         }
         move(xSpeed * xDirection, ySpeed * yDirection);
     }
