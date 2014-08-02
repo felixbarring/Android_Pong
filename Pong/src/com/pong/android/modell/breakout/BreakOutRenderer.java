@@ -44,6 +44,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 
+import com.pong.android.GameOverActivity;
 import com.pong.android.IFGameEvents;
 import com.pong.android.MenuActivity;
 import com.pong.android.R;
@@ -247,11 +248,13 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     // Interface IFGameEvents
     @Override
     public void playerWin() {
+        GameOverActivity.retry = -1;
         MenuActivity.dis.gameOver("Congratulation you won, now press the button of peace!");
     }
 
     @Override
     public void playerLose(int number) {
+        GameOverActivity.retry = -1;
         MenuActivity.dis.gameOver("You survived for "+number+" amount of rounds, try again or rage quit, the choice is yours.");
     }
 

@@ -42,6 +42,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 
+import com.pong.android.GameOverActivity;
 import com.pong.android.IFGameEvents;
 import com.pong.android.MenuActivity;
 import com.pong.android.R;
@@ -234,11 +235,13 @@ public class PongRenderer implements Renderer, IFGameEvents {
     @Override
     public void playerWin() {
         // Lol will never happen
+        GameOverActivity.retry = 1;
         MenuActivity.dis.gameOver("This cannot happen :-)");
     }
 
     @Override
     public void playerLose(int number) {
+        GameOverActivity.retry = 1;
         MenuActivity.dis.gameOver("You survived for "+number+" amount of rounds!");
     }
 

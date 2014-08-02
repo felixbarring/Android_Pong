@@ -4,6 +4,7 @@ import com.pong.android.R;
 import com.pong.android.R.id;
 import com.pong.android.R.layout;
 import com.pong.android.R.menu;
+import com.pong.android.modell.breakout.BreakOutActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 public class GameOverActivity extends ActionBarActivity {
     
     public static String message = "";
+    public static int retry = 0;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,12 @@ public class GameOverActivity extends ActionBarActivity {
     }
     
     public void btn1Clicked(View view) {
-        startActivity(new Intent(this, PongActivity.class));
+        if(retry == 1){
+            startActivity(new Intent(this, PongActivity.class));
+        } else {
+            startActivity(new Intent(this, BreakOutActivity.class));
+
+        }
     }
     
     public void btn2Clicked(View view) {
