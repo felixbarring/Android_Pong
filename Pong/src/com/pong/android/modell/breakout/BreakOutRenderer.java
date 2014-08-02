@@ -73,6 +73,7 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     private final Activity activity;
 
     private final BreakOutPlayer player;
+    private final Rectangle board;
     private final List<Rectangle> bricks = new ArrayList<Rectangle>();
 
     public BreakOutRenderer(Activity activity) {
@@ -82,17 +83,22 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         player =
             new BreakOutPlayer(0.1f, 0.4f, -0.9f, 0.2f, 0, 1.0f, 0.5f, 0.0f);
 
-        Rectangle brick =
-            new Rectangle(0.1f, 0.2f, 0.5f, -0.7f, 6, 0.0f, 0.0f, (float)(0/3.0));
+        board = new Rectangle(2.0f, 2.0f, 0.0f, 0.0f, 6, 0.5f, 0.5f, 0.1f);
 
-		for (int j = 0; j < 3; j++){
-        	for (int i = 0; i < 6; i++) {
-        	    Rectangle brick1 =
-        	        new Rectangle(0.1f, 0.2f, 0.5f, -0.7f, 6, 0.0f, 0.0f, (float)(j/3.0));
-        	    brick1.move((float)(0.15*j), i * 0.3f);
-        	    bricks.add(brick1);
-        	}
-		}
+        // Only used to set up tableVerticesWithTriangles
+        Rectangle brick =
+            new Rectangle(0.1f, 0.2f, 0.5f, -0.7f, 12, 0.0f, 0.0f,
+                (float) (0 / 3.0));
+
+        for (int j = 0; j < 3; j++) {
+            for (int i = 0; i < 6; i++) {
+                Rectangle brick1 =
+                    new Rectangle(0.1f, 0.2f, 0.5f, -0.7f, 12, 0.0f, 0.0f,
+                        (float) (j / 3.0));
+                brick1.move((float) (0.15 * j), i * 0.3f);
+                bricks.add(brick1);
+            }
+        }
 
         float[] tableVerticesWithTriangles =
             {
@@ -104,11 +110,27 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 player.topLeftX + player.WIDTH,
                 player.topLeftY - player.HEIGHT,
                 // Player Triangle 2
-                player.topLeftX + player.WIDTH, player.topLeftY,
-                player.topLeftX, player.topLeftY,
+                player.topLeftX + player.WIDTH,
+                player.topLeftY,
+                player.topLeftX,
+                player.topLeftY,
                 player.topLeftX + player.WIDTH,
                 player.topLeftY - player.HEIGHT,
 
+                // Player Triangle 1
+                board.topLeftX,
+                board.topLeftY,
+                board.topLeftX,
+                board.topLeftY - board.HEIGHT,
+                board.topLeftX + board.WIDTH,
+                board.topLeftY - board.HEIGHT,
+                // Player Triangle 2
+                board.topLeftX + board.WIDTH, board.topLeftY,
+                board.topLeftX, board.topLeftY,
+                board.topLeftX + board.WIDTH,
+                board.topLeftY - board.HEIGHT,
+
+                // Brick triangle 1
                 brick.topLeftX, brick.topLeftY, brick.topLeftX,
                 brick.topLeftY - brick.HEIGHT,
                 brick.topLeftX + brick.WIDTH,
@@ -189,6 +211,8 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         GLES20.glUniformMatrix4fv(uMatrixLocation, 1, false, projectionMatrix,
             0);
 
+        board.draw();
+        
         player.draw();
 
         for (Rectangle r : bricks) {
