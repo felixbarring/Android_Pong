@@ -83,7 +83,7 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         player =
             new BreakOutPlayer(0.1f, 0.4f, -0.9f, 0.2f, 0, 1.0f, 0.5f, 0.0f);
 
-        board = new Rectangle(2.0f, 2.0f, 0.0f, 0.0f, 6, 0.5f, 0.5f, 0.1f);
+        board = new Rectangle(2.0f, 2.0f, -1.0f, 1.0f, 6, 0.5f, 0.5f, 0.1f);
 
         // Only used to set up tableVerticesWithTriangles
         Rectangle brick =
@@ -125,8 +125,10 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 board.topLeftX + board.WIDTH,
                 board.topLeftY - board.HEIGHT,
                 // Player Triangle 2
-                board.topLeftX + board.WIDTH, board.topLeftY,
-                board.topLeftX, board.topLeftY,
+                board.topLeftX + board.WIDTH,
+                board.topLeftY,
+                board.topLeftX,
+                board.topLeftY,
                 board.topLeftX + board.WIDTH,
                 board.topLeftY - board.HEIGHT,
 
@@ -212,7 +214,7 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
             0);
 
         board.draw();
-        
+
         player.draw();
 
         for (Rectangle r : bricks) {
