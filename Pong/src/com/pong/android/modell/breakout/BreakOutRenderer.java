@@ -31,6 +31,8 @@ package com.pong.android.modell.breakout;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -45,7 +47,6 @@ import android.opengl.Matrix;
 import com.pong.android.IFGameEvents;
 import com.pong.android.MenuActivity;
 import com.pong.android.R;
-import com.pong.android.R.raw;
 import com.pong.android.util.ShaderUtility;
 
 public class BreakOutRenderer implements Renderer, IFGameEvents {
@@ -72,14 +73,19 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     private final Activity activity;
 
     private final BreakOutPlayer player;
+    private final List<Rectangle> bricks = new ArrayList<Rectangle>();
 
     public BreakOutRenderer(Activity activity) {
         this.context = activity;
         this.activity = activity;
 
         player =
-            new BreakOutPlayer(0.1f, 0.3f, 0.5f, 0.0f, 0, 1.0f,
-                0.5f, 0.0f);
+            new BreakOutPlayer(0.1f, 0.3f, 0.5f, 0.0f, 0, 1.0f, 0.5f, 0.0f);
+
+        Rectangle brick =
+            new Rectangle(0.1f, 0.3f, 0.8f, -0.9f, 6, 0.0f, 0.0f, 1.0f);
+        
+        bricks.add(brick);
 
         float[] tableVerticesWithTriangles = { // Player Triangle 1
             player.topLeftX, player.topLeftY,
@@ -90,7 +96,18 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
                 // Player Triangle 2
                 player.topLeftX + player.WIDTH, player.topLeftY,
                 player.topLeftX, player.topLeftY,
-                player.topLeftX + player.WIDTH, player.topLeftY - player.HEIGHT };
+                player.topLeftX + player.WIDTH, player.topLeftY - player.HEIGHT,
+                
+                brick.topLeftX, brick.topLeftY,
+                brick.topLeftX,
+                brick.topLeftY - brick.HEIGHT,
+                brick.topLeftX + brick.WIDTH,
+                brick.topLeftY - brick.HEIGHT,
+                // Player Triangle 2
+                brick.topLeftX + brick.WIDTH, brick.topLeftY,
+                brick.topLeftX, brick.topLeftY,
+                brick.topLeftX + brick.WIDTH, brick.topLeftY - brick.HEIGHT
+        };
 
         vertexData =
             ByteBuffer
@@ -164,6 +181,10 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
             0);
 
         player.draw();
+        
+        for(Rectangle r : bricks){
+            r.draw();
+        }
 
     }
 
