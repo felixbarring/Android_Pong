@@ -74,7 +74,8 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
 
     private final BreakOutPlayer player;
     private final Rectangle board;
-    private final List<Rectangle> bricks = new ArrayList<Rectangle>();
+    private final List<Brick> bricks = new ArrayList<Brick>();
+    private final BreakOutBall ball;
 
     public BreakOutRenderer(Activity activity) {
         this.context = activity;
@@ -86,19 +87,21 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         board = new Rectangle(2.0f, 2.0f, -1.0f, 1.0f, 6, 0.5f, 0.5f, 0.1f);
 
         // Only used to set up tableVerticesWithTriangles
-        Rectangle brick =
-            new Rectangle(0.1f, 0.2f, 0.5f, -0.7f, 12, 0.0f, 0.0f,
+        Brick brick =
+            new Brick(0.1f, 0.2f, 0.5f, -0.7f, 12, 0.0f, 0.0f,
                 (float) (0 / 3.0));
 
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 6; i++) {
-                Rectangle brick1 =
-                    new Rectangle(0.1f, 0.2f, 0.5f, -0.7f, 12, 0.0f, 0.0f,
+                Brick brick1 =
+                    new Brick(0.1f, 0.2f, 0.5f, -0.7f, 12, 0.0f, 0.0f,
                         (float) (j / 3.0));
                 brick1.move((float) (0.15 * j), i * 0.3f);
                 bricks.add(brick1);
             }
         }
+        
+        ball = new BreakOutBall(0.1f, 0.1f, -0.05f, 0.05f, 18, 0.75f, 0.75f, 0.75f, player, bricks, this);
 
         float[] tableVerticesWithTriangles =
             {
@@ -201,8 +204,8 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     @Override
     public void onDrawFrame(GL10 glUnused) {
         // Update game logic
-        for (Float i : queueOfTouchCoordinates) {
-            // Do semething here :-)
+        for (Float f : queueOfTouchCoordinates) {
+            player.touch(f);
         }
         queueOfTouchCoordinates.clear();
 
@@ -216,6 +219,7 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         board.draw();
 
         player.draw();
+        ball.draw();
 
         for (Rectangle r : bricks) {
             r.draw();
@@ -224,6 +228,8 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
     }
 
     private void gameTick() {
+        player.tick();
+        ball.tick();
     }
 
     // Interface IFGameEvents

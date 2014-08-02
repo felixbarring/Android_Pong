@@ -54,10 +54,6 @@ public class PongPlayer extends Rectangle {
         target = (f + (f - resultVec[1])) + (float) (HEIGHT / 2);
     }
 
-    public void setDirection(int i) {
-        direction = i;
-    }
-
     public void tick() {
         if (target >= topLeftY) {
             // If the distance to the target is less than the speed
