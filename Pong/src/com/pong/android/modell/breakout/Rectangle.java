@@ -109,8 +109,7 @@ public class Rectangle {
      * from the OFFSET_VERTEX_DATA to OFFSET_VERTEX_DATA+6.
      */
     public void draw() {
-        // glUniform4f(uColorLocation, RED, GREEN, BLUE, 0.0f);
-        glUniform4f(BreakOutRenderer.uColorLocation, 0.0f, 1.0f, 0.0f, 0.0f);
+        glUniform4f(BreakOutRenderer.uColorLocation, RED, GREEN, BLUE, 0.0f);
         glUniform4f(BreakOutRenderer.uPositionOffsetLocation, topLeftX
             - INITIAL_TOPLEFT_X, topLeftY - INITIAL_TOPLEFT_Y, 0.0f, 0.0f);
         glDrawArrays(GL_TRIANGLES, OFFSET_VERTEX_DATA, 6);

@@ -80,12 +80,32 @@ public class BreakOutRenderer implements Renderer, IFGameEvents {
         this.activity = activity;
 
         player =
-            new BreakOutPlayer(0.1f, 0.3f, 0.5f, 0.0f, 0, 1.0f, 0.5f, 0.0f);
+            new BreakOutPlayer(0.1f, 0.4f, -0.9f, -0.2f, 0, 1.0f, 0.5f, 0.0f);
 
         Rectangle brick =
             new Rectangle(0.1f, 0.3f, 0.8f, -0.9f, 6, 0.0f, 0.0f, 1.0f);
-        
         bricks.add(brick);
+        
+        brick =
+            new Rectangle(0.1f, 0.3f, 0.8f, -0.6f, 6, 0.0f, 0.0f, 1.0f);
+        bricks.add(brick);
+        
+        brick =
+            new Rectangle(0.1f, 0.3f, 0.8f, -0.2f, 6, 0.0f, 0.0f, 1.0f);
+        bricks.add(brick);
+        
+        brick =
+            new Rectangle(0.1f, 0.3f, 0.8f, 0.1f, 6, 0.0f, 0.0f, 1.0f);
+        bricks.add(brick);
+        
+        brick =
+            new Rectangle(0.1f, 0.3f, 0.8f, 0.4f, 6, 0.0f, 0.0f, 1.0f);
+        bricks.add(brick);
+        
+        brick =
+            new Rectangle(0.1f, 0.3f, 0.8f, 0.8f, 6, 0.0f, 0.0f, 1.0f);
+        bricks.add(brick);
+        
 
         float[] tableVerticesWithTriangles = { // Player Triangle 1
             player.topLeftX, player.topLeftY,
