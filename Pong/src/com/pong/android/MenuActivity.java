@@ -1,6 +1,7 @@
 package com.pong.android;
 
 import com.pong.android.modell.breakout.BreakOutActivity;
+import com.pong.android.modell.dodgeball.DodgeballActivity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
@@ -47,6 +48,10 @@ public class MenuActivity extends ActionBarActivity {
     
     public void btn2Clicked(View view) {
         startActivity(new Intent(this, BreakOutActivity.class));
+    }
+    
+    public void btn3Clicked(View view) {
+        startActivity(new Intent(this, DodgeballActivity.class));
     }
 
     public void gameOver(String message) {

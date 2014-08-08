@@ -55,7 +55,7 @@ public class BreakOutPlayer extends Rectangle {
         // int lhsMatOffset, float[] rhsVec, int rhsVecOffset)
         final float[] rhsV = { 0.0f, f, 0.0f, 0.0f };
         final float[] resultVec = new float[4];
-        Matrix.multiplyMV(resultVec, 0, PongRenderer.projectionMatrix, 0, rhsV,
+        Matrix.multiplyMV(resultVec, 0, BreakOutRenderer.projectionMatrix, 0, rhsV,
             0);
         target = (f) + (float) (HEIGHT / 2);
     }

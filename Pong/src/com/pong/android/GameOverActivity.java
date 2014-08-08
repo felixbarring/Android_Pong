@@ -5,6 +5,7 @@ import com.pong.android.R.id;
 import com.pong.android.R.layout;
 import com.pong.android.R.menu;
 import com.pong.android.modell.breakout.BreakOutActivity;
+import com.pong.android.modell.dodgeball.DodgeballActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -60,7 +61,10 @@ public class GameOverActivity extends ActionBarActivity {
     public void btn1Clicked(View view) {
         if(retry == 1){
             startActivity(new Intent(this, PongActivity.class));
-        } else {
+        } else if (retry == 2){
+            startActivity(new Intent(this, DodgeballActivity.class));
+        }
+        else {
             startActivity(new Intent(this, BreakOutActivity.class));
 
         }

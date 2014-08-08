@@ -11,5 +11,7 @@
     <string name="title_activity_pong_game_over">PongGameOverActivity</string>
     <string name="btn_game_over_retry">Try again</string>
     <string name="btn_game_over_return">Return to menu</string>
+    <string name="btn_dodgeball">Dodgeball</string>
+
 
 </resources>

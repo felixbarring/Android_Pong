@@ -28,4 +28,14 @@
         android:onClick="btn2Clicked"
         android:text="@string/btn_breakout" />
 
+    <Button
+        android:id="@+id/Button03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Button02"
+        android:layout_alignRight="@+id/Button02"
+        android:layout_below="@+id/Button02"
+        android:onClick="btn3Clicked"
+        android:text="@string/btn_dodgeball" />
+
 </RelativeLayout>
